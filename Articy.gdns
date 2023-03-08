@@ -1,0 +1,9 @@
+[gd_resource type="NativeScript" load_steps=2 format=2]
+
+[ext_resource path="res://Articy.gdnlib" type="GDNativeLibrary" id=1]
+
+[resource]
+resource_name = "ArticyNode"
+class_name = "Articy"
+library = ExtResource( 1 )
+script_class_name = "Articy"
