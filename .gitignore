@@ -3,4 +3,8 @@
 .DS_Store
 export
 script_templates
-example_project.json
+*.articy*
+*.json
+
+addons/**/*.dylib
+addons/**/*.dll

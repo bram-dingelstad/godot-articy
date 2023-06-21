@@ -8,21 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "",
-"class": "Articy",
-"language": "NativeScript",
-"path": "res://Articy.gdns"
-} ]
-_global_script_class_icons={
-"Articy": ""
-}
-
 [application]
 
 config/name="Godot Articy"
 run/main_scene="res://Dialogue.tscn"
 config/icon="res://icon.png"
+
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [editor_plugins]
 
