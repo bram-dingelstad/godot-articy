@@ -14,6 +14,14 @@ config/name="Godot Articy"
 run/main_scene="res://Dialogue.tscn"
 config/icon="res://icon.png"
 
+[articy]
+
+autoload_database_path="res://craftcraft.articy"
+
+[autoload]
+
+Database="*res://addons/godot-articy/Database.gdns"
+
 [debug]
 
 gdscript/warnings/return_value_discarded=false

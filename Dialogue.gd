@@ -9,20 +9,19 @@ func _ready():
 	$Interpreter.connect('choices', self, '_on_choices')
 	$Interpreter.connect('stopped', self, '_on_stopped')
 
-	# print($Database.get_models_of_type("Customers")[0])
-	# print($Database.get_models_of_type("Dialogue")[0])
+	# NOTE: You can also just add the Database in your scene instead of as an AutoLoad, and refer to it with $Database
+	print(Database.get_models_of_type("Customers")[0])
+	print(Database.get_models_of_type("Dialogue")[0])
 
 	# Day 1
-	$Interpreter.start($Database.get_available_dialogues()[0].id)
-
-	
+	$Interpreter.start(Database.get_available_dialogues()[0].id)
 
 
 func _on_line(data):
 	print(data)
 	# NOTE: Wait one frame to prevent re-entrant problems with GDNative
 	yield(get_tree(), 'idle_frame')
-	var speaker = $Database.get_model(data.speaker)
+	var speaker = Database.get_model(data.speaker)
 	$RichTextLabel.bbcode_text = data.line
 
 
