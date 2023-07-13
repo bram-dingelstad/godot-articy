@@ -12,10 +12,6 @@ func _ready():
 	$Interpreter.connect('choices', self, '_on_choices')
 	$Interpreter.connect('stopped', self, '_on_stopped')
 
-	# NOTE: You can also just add the Database in as an AutoLoad instead of your scene and refer to it with Database
-	print($Database.get_models_of_type("Customers")[0])
-	print($Database.get_models_of_type("Dialogue")[0])
-
 	var groundskeeper_done = "0x0100000100000481"
 
 
@@ -58,3 +54,6 @@ func _input(event):
 		match event.scancode:
 			KEY_ENTER:
 				$Interpreter.advance()
+			KEY_E:
+				print('Attempting to exhaust maximally')
+				$Interpreter.exhaust_maximally()
