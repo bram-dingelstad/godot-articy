@@ -12,37 +12,48 @@ func _ready():
 	$Interpreter.connect('choices', self, '_on_choices')
 	$Interpreter.connect('stopped', self, '_on_stopped')
 
-	var groundskeeper_done = "0x0100000100000481"
+	for model in $Database.get_all_models():
+		if model.Type == 'DialogueFragment':
+			var outputs = model.Properties.output_pins[0].connections.size()
+			if outputs > 1:
+				print(model)
+				break
 
+			
+	var choice_dialogue = '0x01000001000003DF'
 
-	# Day 1
-	$Interpreter.set_state('quality.groundskeeper_dagger', DAGGER_IS_LOW_QUALITY)
-	$Interpreter.start(groundskeeper_done)
+	$Interpreter.start(choice_dialogue)
 
 
 func _on_line(data):
 	# NOTE: Wait one frame to prevent re-entrant problems with GDNative
 	yield(get_tree(), 'idle_frame')
-	var speaker = $Database.get_model(data.speaker)
+	var _speaker = $Database.get_model(data.speaker)
+	print(data)
 	$RichTextLabel.bbcode_text = data.line
 
 
 func _on_choices(data):
 	var index = 0
-	for choice in data:
-		var button = template.duplicate()
-		button.text = choice.label
-		button.connect('pressed', self, '_on_choice', [index])
-		$VBoxContainer.add_child(button)
-		index += 1
 
-func _on_choice(index):
 	for child in $VBoxContainer.get_children():
 		$VBoxContainer.remove_child(child)
 		child.queue_free()
 
-	$Interpreter.choose(index)
-	$Interpreter.advance()
+	for choice in data:
+		print(choice)
+		var button = template.duplicate()
+		button.text = choice.label
+		button.connect('pressed', self, '_on_choice', [choice.id])
+		$VBoxContainer.add_child(button)
+		index += 1
+
+func _on_choice(id):
+	for child in $VBoxContainer.get_children():
+		$VBoxContainer.remove_child(child)
+		child.queue_free()
+
+	$Interpreter.choose(id)
 
 func _on_stopped():
 	$RichTextLabel.bbcode_text = 'End of dialogue, thank you for playing :)'

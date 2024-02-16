@@ -35,6 +35,11 @@ enabled=PoolStringArray( "res://addons/godot-articy/plugin.cfg" )
 
 common/drop_mouse_on_gui_input_disabled=true
 
+[network]
+
+limits/debugger_stdout/max_chars_per_second=4194304
+limits/debugger_stdout/max_messages_per_frame=20480
+
 [physics]
 
 common/enable_pause_aware_picking=true
